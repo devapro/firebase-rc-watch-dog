@@ -33,8 +33,8 @@ const slackPoster = function() {
   }
 
   function sendToSlack(config, payload) {
-    console.log(payload)
-    return;
+    // console.log(payload)
+    // return;
     request.post(config.slackWebHookUrl,
       {
         form: { payload: JSON.stringify(payload) }
