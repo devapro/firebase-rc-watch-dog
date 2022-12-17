@@ -1,6 +1,7 @@
 node_modules/*
 configs/*
 data/*
+.DS_Store
 
 !configs/README.md
 !data/README.md

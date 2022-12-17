@@ -1,7 +1,7 @@
 {
-  "name": "config",
+  "name": "firebase-rc-watch-dog",
   "scripts": {
-    "compile": "cp ../tsconfig.json.template ./tsconfig.json && tsc"
+    "run": "node index_test.js"
   },
   "dependencies": {
     "cron": "^2.1.0",
