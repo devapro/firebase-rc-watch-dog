@@ -12,7 +12,6 @@
  * the License.
  */
 const configReader = require("./slack_config_reader.js")
-const request = require('request');
 const yellow = "#DDA511";
 const red = "#DD2222";
 const green = "#22DD22";
@@ -32,19 +31,27 @@ const slackPoster = function() {
     sendToSlack(config, postPayload)
   }
 
-  function sendToSlack(config, payload) {
+  async function sendToSlack(config, payload) {
     // console.log(payload)
     // return;
-    request.post(config.slackWebHookUrl,
-      {
-        form: { payload: JSON.stringify(payload) }
-      }, (error, response, body) => {
+    try {
+      const formData = new URLSearchParams();
+      formData.append('payload', JSON.stringify(payload));
 
-            if (error || response.statusCode !== 200) {
-              console.log("Error posting to slack, response code " + response.statusCode + "\n" + error);
-            }
-        }
-    );
+      const response = await fetch(config.slackWebHookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+        body: formData.toString()
+      });
+
+      if (!response.ok) {
+        console.log("Error posting to slack, response code " + response.status);
+      }
+    } catch (error) {
+      console.log("Error posting to slack: " + error);
+    }
   }
 
   function createSlackAttachment(diff, version, user) {

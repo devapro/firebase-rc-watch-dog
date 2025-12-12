@@ -16,3 +16,13 @@ docker run -d firebase-rc-watch-dog
 Permission denied fetching Google Analytics data
 
 https://github.com/firebase/firebase-admin-node/issues/1015
+
+### Firebase RC mapper
+
+Save RC values as JS object, and can filter RC values by a specific condition
+
+```javascript
+
+node ./rc_conditions_mapper.js condition-name
+
+```
